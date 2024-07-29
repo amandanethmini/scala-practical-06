@@ -36,7 +36,7 @@ object StudentManaging {
       marks: Int,
       totalMarks: Int
   ): (Boolean, Option[String]) = {
-    if (name.trim.isEmpty) {
+    if (name.isEmpty) {
       (false, Some("Name cannot be empty."))
     } else if (marks < 0 || marks > totalMarks) {
       (
