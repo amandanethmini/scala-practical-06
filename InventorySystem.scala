@@ -28,17 +28,20 @@ object InventorySystem {
       inv1: Map[Int, Product],
       inv2: Map[Int, Product]
   ): Map[Int, Product] = {
-    inv2.foldLeft(inv1) { case (acc, (id, newProduct)) =>
-      acc.get(id) match {
+
+    val combined = inv2.map { case (id, newProduct) =>
+      inv1.get(id) match {
         case Some(existingProduct) =>
-          acc + (id -> existingProduct.copy(
+          id -> Product(
+            name = existingProduct.name,
             quantity = existingProduct.quantity + newProduct.quantity,
             price = math.max(existingProduct.price, newProduct.price)
-          ))
+          )
         case None =>
-          acc + (id -> newProduct)
+          id -> newProduct
       }
     }
+    inv1 ++ combined
   }
 
   def checkProductExists(inventory: Map[Int, Product], id: Int): Unit = {
