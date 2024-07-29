@@ -9,11 +9,12 @@ object InventorySystem {
 
   val inventory2: Map[Int, Product] = Map(
     102 -> Product("ProductB", 10, 4.0),
-    104 -> Product("ProductD", 5, 10.0)
+    104 -> Product("ProductD", 5, 10.0),
+    103 -> Product("ProductC", 5, 4.0)
   )
 
-  def getAllProductNames(inventory: Map[Int, Product]): Iterable[String] = {
-    inventory.values.map(_.name)
+  def getAllProductNames(inventory: Map[Int, Product]): List[String] = {
+    inventory.values.toList.map(_.name)
   }
 
   def calculateTotalValue(inventory: Map[Int, Product]): Double = {
